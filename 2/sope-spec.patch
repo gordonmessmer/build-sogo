@@ -1,0 +1,20 @@
+--- sope-SOPE-2.3.18/packaging/rhel/sope.spec.orig	2016-12-09 23:41:10.217589536 -0800
++++ sope-SOPE-2.3.18/packaging/rhel/sope.spec	2016-12-09 23:44:03.295296867 -0800
+@@ -16,7 +16,7 @@
+ Source:       %{sope_source}
+ Prefix:       /usr
+ BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root
+-BuildPreReq:  gnustep-make gcc-objc postgresql-devel
++BuildRequires: gnustep-make gcc-objc postgresql-devel openldap-devel gnustep-base-devel gnustep-base libxml2-devel gmp-devel avahi-devel gnutls-devel libgcrypt-devel libffi-devel libxslt-devel libicu-devel
+ 
+ %{?el5:BuildRequires: mysql-devel}
+ %{?el6:BuildRequires: mysql-devel}
+@@ -287,7 +287,7 @@
+ 
+ %prep
+ rm -fr ${RPM_BUILD_ROOT}
+-%setup -q -n SOPE
++%setup -q -n sope-SOPE-2.3.18
+ 
+ # ****************************** build ********************************
+ %build

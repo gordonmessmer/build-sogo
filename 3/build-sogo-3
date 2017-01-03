@@ -1,0 +1,50 @@
+#!/bin/sh
+
+sogo_ver=3.2.3
+sope_rel=20161124
+
+mock="mock -r epel-7-x86_64 --macro-file=sogo.rpmmacros"
+
+wget https://dl.fedoraproject.org/pub/fedora/linux/releases/25/Everything/source/tree/Packages/l/libwbxml-0.11.3-4.fc24.src.rpm
+wget https://github.com/inverse-inc/sogo/archive/SOGo-${sogo_ver}.tar.gz
+wget https://github.com/inverse-inc/sope/archive/SOPE-${sogo_ver}.tar.gz
+
+tar xf SOGo-${sogo_ver}.tar.gz SOGo-${sogo_ver}/packaging/rhel/sogo.spec
+tar xf SOPE-${sogo_ver}.tar.gz sope-SOPE-${sogo_ver}/packaging/rhel/sope.spec
+
+patch -p0 < sogo-spec.patch 
+patch -p0 < sope-spec.patch 
+
+cat > sogo.rpmmacros <<EOF
+%dist_suffix el7
+%sope_buildcount 1
+%sope_makeflags -b
+%sope_major_version 4
+%sope_minor_version 9
+%sope_release ${sope_rel}
+%sope_source SOPE-%{sogo_version}.tar.gz
+%sope_version %{sope_major_version}.%{sope_minor_version}
+%sogo_version ${sogo_ver}
+%sbjson_version 2.3.1
+%sbjson_major_version 2
+EOF
+
+$mock --init
+$mock --copyin SOGo-${sogo_ver}.tar.gz /builddir/build/SOURCES
+$mock --copyin SOPE-${sogo_ver}.tar.gz /builddir/build/SOURCES
+$mock --copyin SOGo-${sogo_ver}/packaging/rhel/sogo.spec /builddir/build/SPECS
+$mock --copyin sope-SOPE-${sogo_ver}/packaging/rhel/sope.spec /builddir/build/SPECS
+$mock --copyin sogo.rpmmacros /builddir/build/SOURCES
+
+$mock --shell <<EOF
+su - mockbuild -c "cat build/SOURCES/sogo.rpmmacros >> .rpmmacros"
+su - mockbuild -c "rpmbuild -bs build/SPECS/sogo.spec"
+su - mockbuild -c "rpmbuild -bs build/SPECS/sope.spec"
+EOF
+
+$mock --copyout /builddir/build/SRPMS/sogo-${sogo_ver}-el7.el7.centos.src.rpm .
+$mock --copyout /builddir/build/SRPMS/sope49-4.9-${sope_rel}.el7.1.src.rpm .
+
+$mock --rebuild libwbxml-0.11.3-4.fc24.src.rpm
+$mock --rebuild sope49-4.9-${sope_rel}.el7.1.src.rpm
+$mock --rebuild sogo-${sogo_ver}-el7.el7.centos.src.rpm
