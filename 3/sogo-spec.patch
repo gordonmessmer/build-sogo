@@ -1,5 +1,5 @@
---- SOGo-3.2.3/packaging/rhel/sogo.spec.orig	2016-12-09 23:40:59.809907664 -0800
-+++ SOGo-3.2.3/packaging/rhel/sogo.spec	2016-12-10 00:15:21.195292304 -0800
+--- sogo-SOGo-3.2.5/packaging/rhel/sogo.spec.orig	2016-12-09 23:40:59.809907664 -0800
++++ sogo-SOGo-3.2.5/packaging/rhel/sogo.spec	2016-12-10 00:15:21.195292304 -0800
 @@ -38,7 +38,7 @@
  AutoReqProv:  off
  Requires:     gnustep-base >= 1.23, sope%{sope_major_version}%{sope_minor_version}-core, httpd, sope%{sope_major_version}%{sope_minor_version}-core, sope%{sope_major_version}%{sope_minor_version}-appserver, sope%{sope_major_version}%{sope_minor_version}-ldap, sope%{sope_major_version}%{sope_minor_version}-cards >= %{sogo_version}, sope%{sope_major_version}%{sope_minor_version}-gdl1-contentstore >= %{sogo_version}, sope%{sope_major_version}%{sope_minor_version}-sbjson, libmemcached, memcached, tmpwatch, zip
@@ -9,6 +9,15 @@
  
  
  # Required by MS Exchange freebusy lookups
+@@ -171,7 +171,7 @@
+ ########################################
+ %prep
+ rm -fr ${RPM_BUILD_ROOT}
+-%setup -q -n SOGo-%{sogo_version}
++%setup -q -n sogo-SOGo-%{sogo_version}
+ 
+ 
+ # small tweak to the python script for RHEL5
 @@ -243,8 +243,8 @@
  install -d ${RPM_BUILD_ROOT}/var/log/sogo
  install -d ${RPM_BUILD_ROOT}/var/run/sogo

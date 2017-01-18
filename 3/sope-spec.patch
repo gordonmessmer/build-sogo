@@ -1,5 +1,5 @@
---- sope-SOPE-3.2.3/packaging/rhel/sope.spec.orig	2016-12-09 23:41:10.217589536 -0800
-+++ sope-SOPE-3.2.3/packaging/rhel/sope.spec	2016-12-09 23:44:03.295296867 -0800
+--- sope-SOPE-3.2.5/packaging/rhel/sope.spec.orig	2016-12-09 23:41:10.217589536 -0800
++++ sope-SOPE-3.2.5/packaging/rhel/sope.spec	2016-12-09 23:44:03.295296867 -0800
 @@ -16,7 +16,7 @@
  Source:       %{sope_source}
  Prefix:       /usr
@@ -14,7 +14,7 @@
  %prep
  rm -fr ${RPM_BUILD_ROOT}
 -%setup -q -n SOPE
-+%setup -q -n sope-SOPE-3.2.3
++%setup -q -n sope-SOPE-%{sogo_version}
  
  # ****************************** build ********************************
  %build
