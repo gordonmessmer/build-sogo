@@ -1,7 +1,7 @@
 #!/bin/sh
 
-sogo_ver=2.3.18
-sope_rel=20161124
+sogo_ver=2.3.19
+sope_rel=20170119
 
 mock="mock -r epel-7-x86_64 --macro-file=sogo.rpmmacros"
 
@@ -11,8 +11,12 @@ wget https://github.com/inverse-inc/sope/archive/SOPE-${sogo_ver}.tar.gz
 tar xf SOGo-${sogo_ver}.tar.gz sogo-SOGo-${sogo_ver}/packaging/rhel/sogo.spec
 tar xf SOPE-${sogo_ver}.tar.gz sope-SOPE-${sogo_ver}/packaging/rhel/sope.spec
 
-patch -p0 < sogo-spec.patch 
-patch -p0 < sope-spec.patch 
+pushd sogo-SOGo-${sogo_ver}
+patch -p1 < ../sogo-spec.patch
+popd
+pushd sope-SOPE-${sogo_ver}
+patch -p1 < ../sope-spec.patch
+popd
 
 cat > sogo.rpmmacros <<EOF
 %dist_suffix el7
