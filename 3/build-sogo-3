@@ -1,7 +1,7 @@
 #!/bin/sh
 
-sogo_ver=3.2.5
-sope_rel=20170110
+sogo_ver=3.2.6
+sope_rel=20170123
 
 mock="mock -r epel-7-x86_64 --macro-file=sogo.rpmmacros"
 
