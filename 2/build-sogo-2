@@ -49,4 +49,6 @@ $mock --copyout /builddir/build/SRPMS/sogo-${sogo_ver}-el7.el7.centos.src.rpm .
 $mock --copyout /builddir/build/SRPMS/sope49-4.9-${sope_rel}.el7.1.src.rpm .
 
 $mock --rebuild sope49-4.9-${sope_rel}.el7.1.src.rpm
+$mock --copyout /builddir/build/RPMS/'*' .
 $mock --rebuild sogo-${sogo_ver}-el7.el7.centos.src.rpm
+$mock --copyout /builddir/build/RPMS/'*' .

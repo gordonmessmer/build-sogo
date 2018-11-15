@@ -1,5 +1,15 @@
---- sope-SOPE-3.2.5/packaging/rhel/sope.spec.orig	2016-12-09 23:41:10.217589536 -0800
-+++ sope-SOPE-3.2.5/packaging/rhel/sope.spec	2016-12-09 23:44:03.295296867 -0800
+--- sope-SOPE-4.0.2/packaging/rhel/sope.spec.orig	2018-10-10 09:59:39.286077117 -0700
++++ sope-SOPE-4.0.2/packaging/rhel/sope.spec	2018-08-24 06:03:11.000000000 -0700
+@@ -1,7 +1,7 @@
+ %define apache_modules_dir %{_usr}/lib/httpd/modules
+ %define apache_conf_dir    %{_sysconfdir}/httpd/conf.d
+-%define oracle_support     1
+-%{?el7:%define oracle_support 1}
++%define oracle_support     0
++%{?el7:%define oracle_support 0}
+ 
+ Summary:      SOPE
+ Name:         sope%{sope_major_version}%{sope_minor_version}
 @@ -16,7 +16,7 @@
  Source:       %{sope_source}
  Prefix:       /usr
