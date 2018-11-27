@@ -52,7 +52,10 @@ $mock --copyout /builddir/build/SRPMS/sogo-${sogo_ver}-el7.el7.src.rpm .
 $mock --copyout /builddir/build/SRPMS/sope49-4.9-${sope_rel}.el7.1.src.rpm .
 
 $mock --rebuild libwbxml-0.11.3-4.fc24.src.rpm
+$mock --copyout /builddir/build/RPMS/'*' .
 $mock --rebuild sope49-4.9-${sope_rel}.el7.1.src.rpm
 $mock --copyout /builddir/build/RPMS/'*' .
-$mock --rebuild sogo-${sogo_ver}-el7.el7.src.rpm
+$mock --init
+$mock --install libwbxml-*.x86_64.rpm sope49-*.x86_64.rpm
+$mock --rebuild --no-clean sogo-${sogo_ver}-el7.el7.src.rpm
 $mock --copyout /builddir/build/RPMS/'*' .
